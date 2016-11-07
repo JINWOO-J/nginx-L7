@@ -1,0 +1,14 @@
+web:
+  image: __IMAGEURL__nginx-l7
+  #build: .
+  command: nginx
+  volumes:
+    - __PWD__/log/:/var/log/nginx/
+    - __PWD__/conf:/etc/nginx
+#    - /etc/localtime:/etc/localtime:ro
+  ports:
+   - "80:80"
+   - "443:443"
+  environment:
+    PHP_POOL: www
+    VIRTUAL_HOST: woori.ytlocal.com

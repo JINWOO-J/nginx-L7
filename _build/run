@@ -1,0 +1,18 @@
+#!/bin/bash
+set -e
+echo "=> Configuring NGINX ..."
+echo "=> Using default NGINX configuration"
+echo "=> Configuring PHP-FPM ..."
+echo "=> Done!"
+echo "=> ... Finished configuring PHP-FPM"
+if [[ $RUN_COMPOSER != "" ]]; then
+echo "=> ... Running composer install"
+su -s /bin/sh www-data -c "cd /var/www/html/ && composer install"
+echo "=> Done!"
+else
+echo "=> Composer not run"
+fi
+
+echo "=> ... Starting Services"
+exec supervisord -n > /dev/null 2>&1
+echo "=> Done!"

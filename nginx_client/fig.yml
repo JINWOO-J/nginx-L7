@@ -1,0 +1,17 @@
+web:
+  image: dr.yt.com/nginx-l7:0.2.2
+  #build: .
+  command: nginx
+  volumes:
+    - ./log/:/var/log/nginx/
+    - ./conf:/etc/nginx
+    - /etc/localtime:/etc/localtime:ro
+    - /etc/hosts:/etc/hosts
+  ports:
+   - "80:80"
+   - "443:443"
+  environment:
+    PHP_POOL: www
+    VIRTUAL_HOST: woori.ytlocal.com
+    LUA_CPATH: "./?.so;/usr/lib/lua/5.1/?.so;/usr/lib/lua/5.1/loadall.so;/usr/lib/lua/5.1/?/?.so;/usr/local/lib/lua/5.1/?.so"
+    LUA_PATH: "./?.lua;/usr/share/lua/5.1/?.lua;/usr/share/lua/5.1/?/init.lua;/usr/lib/lua/5.1/?.lua;/usr/lib64/lua/5.1/?/init.lua;/usr/local/share/lua/5.1/?.lua;/usr/local/share/lua/5.1/?/?.lua"
